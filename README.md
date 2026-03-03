@@ -4,6 +4,29 @@ A GitHub repository template for Python packages using [uv](https://docs.astral.
 
 **Use this template** — click "Use this template" above to create a new repo from this template.
 
+### After creating your repo: replace the placeholder name
+
+Run the Makefile with your **distribution name** (PyPI/repo, use hyphens) and **module name** (for `import` / `python -m`, use underscores):
+
+```bash
+make rename DIST_NAME=my-tool MODULE_NAME=my_tool
+```
+
+Then run `uv sync`, `uv run pytest`, and `uv run ruff check .` to confirm everything works.
+
+**Manual alternative** — replace `pypi-package-uv-template` and `pypi_package_uv_template` everywhere:
+
+| Location                                 | Change                                                                            |
+| ---------------------------------------- | --------------------------------------------------------------------------------- |
+| **Rename directory**                     | `src/pypi_package_uv_template/` → `src/<your_module>/` (e.g. `src/my_package/`)   |
+| [pyproject.toml](pyproject.toml)         | `name = "..."` (PyPI name); `[tool.mypy]` → `packages = ["src/<your_module>"]`    |
+| Python files in `src/`                   | Imports and any string that mentions the old name (e.g. the `print` in `main.py`) |
+| [tests/test_main.py](tests/test_main.py) | `from <your_module> import ...` and the assertion text                            |
+| [docs/api.md](docs/api.md)               | `::: <your_module>` (mkdocstrings directive)                                      |
+| [docs/index.md](docs/index.md)           | Title and `python -m <your_module>` in the usage example                          |
+| [mkdocs.yml](mkdocs.yml)                 | `site_name:` and `site_url:`                                                      |
+| This README                              | Title (above) and the `python -m` command in Usage                                |
+
 ## Installation
 
 ```bash
