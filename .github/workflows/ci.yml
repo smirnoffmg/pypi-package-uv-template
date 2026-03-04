@@ -35,9 +35,6 @@ jobs:
       - name: Pytest
         run: uv run pytest
 
-      - name: Pre-commit (optional)
-        run: uv run pre-commit run --all-files
-
   build-docs:
     runs-on: ubuntu-latest
     needs: lint-and-test
